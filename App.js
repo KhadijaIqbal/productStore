@@ -7,7 +7,13 @@ import {
   TouchableWithoutFeedback,
   Pressable,
 } from 'react-native';
-const board =  [['', '', ''],['', '', ''],['', '', '']];
+import {Modal} from 'react-native';
+
+const masterboard = [
+  ['', '', ''],
+  ['', '', ''],
+  ['', '', ''],
+];
 export default function App() {
   const [getTxt1, setTxt1] = useState('-');
   const [getTxt2, setTxt2] = useState('-');
@@ -18,138 +24,161 @@ export default function App() {
   const [getTxt7, setTxt7] = useState('-');
   const [getTxt8, setTxt8] = useState('-');
   const [getTxt9, setTxt9] = useState('-');
-  const [getResult, setResult] = useState('');
   const [getTurn, setTurn] = useState('p1');
-
+  const [getResult, setResult] = useState('');
+  const [modalVisible, setModalVisible] = useState(false);
   const onClick = (game) => {
     if (getTurn == 'p1') {
       if (game == 1 && getTxt1 == '-') {
         setTxt1('X');
-        board[0][0] = 'X';
+        masterboard[0][0] = 'X';
       }
       if (game == 2 && getTxt2 == '-') {
         setTxt2('X');
-        board[0][1] = 'X';
+        masterboard[0][1] = 'X';
       }
       if (game == 3 && getTxt3 == '-') {
         setTxt3('X');
-        board[0][2] = 'X';
+        masterboard[0][2] = 'X';
       }
       if (game == 4 && getTxt4 == '-') {
         setTxt4('X');
-        board[1][0] = 'X';
+        masterboard[1][0] = 'X';
       }
       if (game == 5 && getTxt5 == '-') {
         setTxt5('X');
-        board[1][1] = 'X';
+        masterboard[1][1] = 'X';
       }
       if (game == 6 && getTxt6 == '-') {
         setTxt6('X');
-        board[1][2] = 'X';
+        masterboard[1][2] = 'X';
       }
       if (game == 7 && getTxt7 == '-') {
         setTxt7('X');
-        board[2][0] = 'X';
+        masterboard[2][0] = 'X';
       }
       if (game == 8 && getTxt8 == '-') {
         setTxt8('X');
-        board[2][1]= 'X';
+        masterboard[2][1] = 'X';
       }
       if (game == 9 && getTxt9 == '-') {
         setTxt9('X');
-        board[2][2] = 'X';
+        masterboard[2][2] = 'X';
       }
       setTurn('p2');
     } else if (getTurn == 'p2') {
       if (game == 1 && getTxt1 == '-') {
         setTxt1('O');
-        board[0][0] = 'O';
+        masterboard[0][0] = 'O';
       }
       if (game == 2 && getTxt2 == '-') {
         setTxt2('O');
-        board[0][1] = 'O';
+        masterboard[0][1] = 'O';
       }
       if (game == 3 && getTxt3 == '-') {
         setTxt3('O');
-        board[0][2] = 'O';
+        masterboard[0][2] = 'O';
       }
       if (game == 4 && getTxt4 == '-') {
         setTxt4('O');
-        board[1][0] = 'O';
+        masterboard[1][0] = 'O';
       }
       if (game == 5 && getTxt5 == '-') {
         setTxt5('O');
-        board[1][1] = 'O';
+        masterboard[1][1] = 'O';
       }
       if (game == 6 && getTxt6 == '-') {
         setTxt6('O');
-        board[1][2] = 'O';
+        masterboard[1][2] = 'O';
       }
       if (game == 7 && getTxt7 == '-') {
         setTxt7('O');
-        board[2][0] = 'O';
+        masterboard[2][0] = 'O';
       }
       if (game == 8 && getTxt8 == '-') {
         setTxt8('O');
-        board[2][1] = 'O';
+        masterboard[2][1] = 'O';
       }
       if (game == 9 && getTxt9 == '-') {
         setTxt9('O');
-        board[2][2] = 'O';
+        masterboard[2][2] = 'O';
       }
       setTurn('p1');
     }
 
     result();
   };
-  const result = () => {
-    if (
-      (board[0][0] === 'X' && board[0][1] === 'X' && board[0][2] === 'X') ||
-      (board[0][0] === 'X' && board[1][1] === 'X' && board[2][2] === 'X') ||
-      (board[0][0] === 'X' && board[1][0] === 'X' && board[2][0] === 'X') ||
-      (board[0][1] === 'X' && board[1][1] === 'X' && board[2][1] === 'X') ||
-      (board[0][2] === 'X' && board[1][2] === 'X' && board[2][2] === 'X') ||
-      (board[0][2] === 'X' && board[1][1] === 'X' && board[2][0] === 'X') ||
-      (board[0][2] === 'X' && board[1][1] === 'X' && board[2][0] === 'X') ||
-      (board[1][0] === 'X' && board[1][1] === 'X' && board[1][2] === 'X') ||
-      (board[2][0] === 'X' && board[2][1] === 'X' && board[2][2] === 'X')
-    ) {
-      setTurn('');
-      alert('PLAYER 1 WINS!');
-    } else if (
-       (board[0][0] === 'O' && board[0][1] === 'O' && board[0][2] === 'O') ||
-      (board[0][0] === 'O' && board[1][1] === 'O' && board[2][2] === 'O') ||
-      (board[0][0] === 'O' && board[1][0] === 'O' && board[2][0] === 'O') ||
-      (board[0][1] === 'O' && board[1][1] === 'O' && board[2][1] === 'O') ||
-      (board[0][2] === 'O' && board[1][2] === 'O' && board[2][2] === 'O') ||
-      (board[0][2] === 'O' && board[1][1] === 'O' && board[2][0] === 'O') ||
-      (board[0][2] === 'O' && board[1][1] === 'O' && board[2][0] === 'O') ||
-      (board[1][0] === 'O' && board[1][1] === 'O' && board[1][2] === 'O') ||
-      (board[2][0] === 'O' && board[2][1] === 'O' && board[2][2] === 'O')
-    ) {
-      setTurn('');
-      alert('PLAYER 2 WINS');
-    }
-
-    else if (
-      board[0][0] !== '' &&
-      board[0][1] !== '' &&
-      board[0][2] !== '' &&
-      board[1][0] !== '' &&
-      board[1][1] !== '' &&
-      board[1][2] !== '' &&
-      board[2][0] !== '' &&
-      board[2][1] !== '' &&
-      board[2][2] !== ''
-    ) {
-      setTurn('')
-      setResult('Tis a DRAW!');
-    }
-  };
   const reload = () => {
     window.location.reload(false);
   };
-  const play = () => {
+  const result = () => {
+    if (
+      (masterboard[0][0] === 'X' && masterboard[0][1] === 'X' && masterboard[0][2] === 'X') ||
+      (masterboard[0][0] === 'X' && masterboard[1][1] === 'X' && masterboard[2][2] === 'X') ||
+      (masterboard[0][0] === 'X' && masterboard[1][0] === 'X' && masterboard[2][0] === 'X') ||
+      (masterboard[0][1] === 'X' && masterboard[1][1] === 'X' && masterboard[2][1] === 'X') ||
+      (masterboard[0][2] === 'X' && masterboard[1][2] === 'X' && masterboard[2][2] === 'X') ||
+      (masterboard[0][2] === 'X' && masterboard[1][1] === 'X' && masterboard[2][0] === 'X') ||
+      (masterboard[0][2] === 'X' && masterboard[1][1] === 'X' && masterboard[2][0] === 'X') ||
+      (masterboard[1][0] === 'X' && masterboard[1][1] === 'X' && masterboard[1][2] === 'X') ||
+      (masterboard[2][0] === 'X' && masterboard[2][1] === 'X' && masterboard[2][2] === 'X')
+    ) {
+      setTurn('');
+      setModalVisible(true);
+      modalDisplay('PLAYER 1 WINS');
+      alert('PLAYER 1 WINS!');
+
+      
+    } else if (
+      (masterboard[0][0] === 'O' && masterboard[0][1] === 'O' && masterboard[0][2] === 'O') ||
+      (masterboard[0][0] === 'O' && masterboard[1][1] === 'O' && masterboard[2][2] === 'O') ||
+      (masterboard[0][0] === 'O' && masterboard[1][0] === 'O' && masterboard[2][0] === 'O') ||
+      (masterboard[0][1] === 'O' && masterboard[1][1] === 'O' && masterboard[2][1] === 'O') ||
+      (masterboard[0][2] === 'O' && masterboard[1][2] === 'O' && masterboard[2][2] === 'O') ||
+      (masterboard[0][2] === 'O' && masterboard[1][1] === 'O' && masterboard[2][0] === 'O') ||
+      (masterboard[0][2] === 'O' && masterboard[1][1] === 'O' && masterboard[2][0] === 'O') ||
+      (masterboard[1][0] === 'O' && masterboard[1][1] === 'O' && masterboard[1][2] === 'O') ||
+      (masterboard[2][0] === 'O' && masterboard[2][1] === 'O' && masterboard[2][2] === 'O')
+    ) {
+      setTurn('');
+      setModalVisible(true);
+      modalDisplay('PLAYER 2 WINS');
+      alert('PLAYER 2 WINS');
+    } else if (
+      masterboard[0][0] !== '' &&
+      masterboard[0][1] !== '' &&
+      masterboard[0][2] !== '' &&
+      masterboard[1][0] !== '' &&
+      masterboard[1][1] !== '' &&
+      masterboard[1][2] !== '' &&
+      masterboard[2][0] !== '' &&
+      masterboard[2][1] !== '' &&
+      masterboard[2][2] !== ''
+    ) {
+      setTurn('');
+      setModalVisible(true);
+      modalDisplay('Tis a Draw');
+      alert('Tis a DRAW!');
+    }
+  };
+  const modalDisplay = () =>{
+         <View style={styles.centeredView}>
+    <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          alert("Modal has been closed.");
+          console.log("aaaa");
+          setModalVisible(!modalVisible);
+          modalDisplay();
+        }}
+      ></Modal></View>
+        
+
+  }
+
+  const newGame = () => {
     setTxt1('-'),
       setTxt2('-'),
       setTxt3('-'),
@@ -159,15 +188,15 @@ export default function App() {
       setTxt7('-'),
       setTxt8('-'),
       setTxt9('-');
-    (board[0][0] = ''),
-      (board[0][1] = ''),
-      (board[0][2] = ''),
-      (board[1][0] = ''),
-      (board[1][1] = ''),
-      (board[1][2] = ''),
-      (board[2][0] = ''),
-      (board[2][1] = ''),
-      (board[2][2] = '');
+    (masterboard[0][0] = ''),
+      (masterboard[0][1] = ''),
+      (masterboard[0][2] = ''),
+      (masterboard[1][0] = ''),
+      (masterboard[1][1] = ''),
+      (masterboard[1][2] = ''),
+      (masterboard[2][0] = ''),
+      (masterboard[2][1] = ''),
+      (masterboard[2][2] = '');
     setResult('');
     setTurn('p1');
   };
@@ -262,9 +291,24 @@ export default function App() {
         <Text />
       </View>
       <View style={[{ padding: '5%', fontSize: '25' }]}>
-        <Button onPress={play} title="NEW GAME" color="#f78da7" />
+        <Button onPress={newGame} title="NEW GAME" color="#f78da7" />
       </View>
+
+   
+       <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+           setResult('');
+            <View style={[styles.textStyle]}>
+        <Button onPress={newGame} title="NEW GAME" color="#f78da7" />
+      </View>
+          
+          </View>
+       
+     
     </View>
+    </View>
+
+    
   );
 }
 
@@ -286,6 +330,12 @@ const styles = StyleSheet.create({
     borderWidth: '1px',
     cursor: 'pointer',
   },
+   centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22
+  },
   btnSize: { width: '100px', textAlign: 'center' },
 
   buttonText: { fontSize: 30, color: '#c2185b' },
@@ -296,5 +346,33 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 30,
+  }, modalView: {
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5
   },
+  button: {
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2
+  },
+  buttonOpen: {
+    backgroundColor: "#F194FF",
+  },
+  
+  textStyle: {
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center"
+  }
 });
