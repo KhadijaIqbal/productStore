@@ -124,11 +124,10 @@ export default function App() {
       (masterboard[2][0] === 'X' && masterboard[2][1] === 'X' && masterboard[2][2] === 'X')
     ) {
       setTurn('');
-      setModalVisible(true);
       modalDisplay('PLAYER 1 WINS');
       alert('PLAYER 1 WINS!');
 
-      
+
     } else if (
       (masterboard[0][0] === 'O' && masterboard[0][1] === 'O' && masterboard[0][2] === 'O') ||
       (masterboard[0][0] === 'O' && masterboard[1][1] === 'O' && masterboard[2][2] === 'O') ||
@@ -361,14 +360,7 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5
   },
-  button: {
-    borderRadius: 20,
-    padding: 10,
-    elevation: 2
-  },
-  buttonOpen: {
-    backgroundColor: "#F194FF",
-  },
+
   
   textStyle: {
     color: "white",
